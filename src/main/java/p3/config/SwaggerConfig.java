@@ -25,14 +25,14 @@ public class SwaggerConfig {
 //					.paths(PathSelectors.any())  // Any path satisfies this condition
 					.paths(PathSelectors.ant("/rest/**"))
 				 // 1b filter out unrelated model classes(like "ModelAndView", "View"), show only our REST api classes
-					.apis(RequestHandlerSelectors.basePackage("exp17c.rest"))
+					.apis(RequestHandlerSelectors.basePackage("p3.rest"))
 					.build()
 				;
 	}
 	/** @return ApiInfo that is used to display customized info on top of the swagger generated api documentations */
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder()
-				.title("exp17c REST api Reference")
+				.title("p3 REST api Reference")
 				.version("1.0.0")
 				.build();
 	}
