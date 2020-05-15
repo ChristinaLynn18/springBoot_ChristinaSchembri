@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+ <head>
+ 	<title>Security with Spring Boot</title>
+ 
+ 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+ 
+ 	<!-- NOTE ilker imports of Bootstrap and it's dependencies(jQuery, popper) -->
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+  	<!-- NOTE ilker if you want to use just the CSS of bootstrap, then you don't need to import JS part of bootstrap (below 3 lines) -->
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+ </head>
+ <body>
+     <h1 style="color: green">Hello! This is Home Page!</h1>
+     <h5 style="color: limeGreen">It is using Bootstrap 4 (instead of using basic CSS)!</h5>
+     
+	 <nav class="nav flex-column">
+	  <a class="nav-link"          th:href="@{/public}">Goto Public Page - allowed to everyone, logged in or not</a>
+	  <a class="nav-link"          th:href="@{/anonymous}">Goto Anonymous Page - should NOT be authenticated</a>
+	  <a class="nav-link active"   th:href="@{/welcome}">Goto Welcome Page - requires authentication</a>
+	  <a class="nav-link"          th:href="@{/authenticated}">Goto Authenticated Page</a>
+	  <a class="nav-link"          th:href="@{/userSettings/home4userSettings}">Goto home4userSettings Page</a>	  
+	  <a class="nav-link"          th:href="@{/user}">Goto User Page</a>
+	  <a class="nav-link"          th:href="@{/admin}">Goto Admin Page</a>
+	  <a class="nav-link"          th:href="@{/home_noBootstrap_usingBasicCssOnly}">Goto Home Page without Bootstrap using just basic CSS only</a>
+	  <a class="nav-link"          th:href="@{/patient}">Goto PATIENT Page</a>
+	  <a class="nav-link"          th:href="@{/provider}">Goto PROVIDER Page</a>
+	  <a class="nav-link"          th:href="@{/employer}">Goto EMPLOYER Page</a>
+	  <a class="nav-link"          th:href="@{/partner}">Goto PARTNER Page</a>
+	  <a class="nav-link"          th:href="@{/internal}">Goto INTERNAL Page</a>
+	 </nav> 	 
+	 <h6>NOTE ilker above is showing "vertical navigation" with bootstrap via "nav" element(wrapping "a" elements)</h6>
+	 
+	 <br/>
+	 
+	 <h6>NOTE ilker below is showing "vertical navigation" with bootstrap via "ul"(wrapping "li" elements, each wrapping "a" element)</h6>
+	 <ul class="nav flex-column">
+	  <li class="nav-item">
+	  	<a class="nav-link active"   th:href="@{/welcome}">Goto Welcome Page</a>
+	  </li>
+	  <li class="nav-item">
+	  	<a class="nav-link"          th:href="@{/user}">Goto User Page</a>
+	  </li>
+	  <li class="nav-item">
+	  	<a class="nav-link"          th:href="@{/admin}">Goto Admin Page</a>
+	  </li>
+	  <li class="nav-item">
+	  	<a class="nav-link disabled" href="#">Disabled - not linked to any route</a>
+	  </li>
+	 </ul> 
+	 
+	 <!-- NOTE ilker sec:  is "thymeleaf security dialect" made available by including thymeleaf-extras-springsecurity5 dependency -->
+	 <div sec:authorize="isAuthenticated()">
+	 	Logged user: <span sec:authentication="name"></span>
+	 	<br/>
+	 	<!-- NOTE ilker, sec:authentication="principal.roles" does NOT exist -->
+		Authorities: <span sec:authentication="principal.authorities"></span>
+	 	<br/>	 
+     	<form th:action="@{/logout}" method="post">
+         <input type="submit" value="Sign Out"/>
+     	</form>
+     </div>
+ </body>
+</html>
