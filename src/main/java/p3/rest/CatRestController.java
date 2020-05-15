@@ -55,7 +55,7 @@ public class CatRestController {
 	}
 	
 	@GetMapping({"/byType{type}"})
-	public  Optional<List<Cat> findByType(@PathVariable String type) {
+	public  Optional<List<Cat>> findByType(@PathVariable String type) {
 		Optional<Cat> cat = catDAO.findByType(type);
 		return cat;
 	}

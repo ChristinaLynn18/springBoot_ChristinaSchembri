@@ -27,7 +27,7 @@ public class CatDAOImpl implements CatDAO {
 	@Override
 	public List<Cat> findAll() {
 		String sql = "SELECT e.id, e.name, e.type FROM cat e";
-		RowMapper<Cat> rowMapper = new BeanPropertyRowMapper<Cat>(Cat.class)
+		RowMapper<Cat> rowMapper = new BeanPropertyRowMapper<Cat>(Cat.class);
 		return jdbcTemplate.query(sql, rowMapper);
 	}
 	
@@ -48,8 +48,8 @@ public class CatDAOImpl implements CatDAO {
 	public Optional<List<Cat>> findByType(String type) {
 		Optional<Cat> oCat = Optional.ofNullable(null);
 		String sql = "SELECT e.id, e.name, e.type FROM cat e WHERE e.type = ?";
-		RowMapper<Cat> rowMapper = new BeanPropertyRowMapper<Cat>(Cat.class)
-				return jdbcTemplate.query(sql, rowMapper)
+		RowMapper<Cat> rowMapper = new BeanPropertyRowMapper<Cat>(Cat.class);
+				return jdbcTemplate.query(sql, rowMapper);
 		
 	}
 
