@@ -22,7 +22,7 @@ import lombok.ToString;
 @Table(name="dogs")
 
 public class Dog {
-	@ApiModelProperty(notes = "Unique id of the staff, which will be auto incremented by hibernate upon add(save)") // NOTE ilker optional line to add swagger model attribute info
+	@ApiModelProperty(notes = "Unique id of the dog, which will be auto incremented by hibernate upon add(save)")
 	@Id
 	@GeneratedValue
 	private Long id;
