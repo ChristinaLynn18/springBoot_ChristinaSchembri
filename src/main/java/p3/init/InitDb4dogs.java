@@ -10,7 +10,7 @@ import p3.jpa.model.Dog;
 import p3.jpa.repo.DogRepository;
 
 @Component
-public class InitDb4dogs {
+public class InitDb4dogs implements CommandLineRunner {
 	private static final Logger logger = LoggerFactory.getLogger(InitDb4dogs.class);
 
 	@Autowired
