@@ -39,6 +39,8 @@ public class MyWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter
 			.antMatchers("/authenticated", "userSettings/**").authenticated()
 			.antMatchers("/admin", "/h2_console/**").hasRole("ADMIN")
 			.antMatchers("/developer/**").hasAnyAuthority("haveDogs", "ROLE_ADMIN", "ROLE_DEVELOPER", "ROLE_catMaster", "ROLE_dogMaster")
+			.antMatchers("/cats").hasRole("catMaster")
+			.antMatchers("/dogs").hasAnyAuthority("haveDogs", "ROLE_dogMaster")
 			.antMatchers("/rest/v1/catsUser/echoMessage").hasRole("catMaster")
 			.antMatchers("/rest/v1/dogsUser/echoMessage").hasAnyAuthority("haveDogs", "ROLE_dogMaster")
 			.anyRequest().authenticated()
