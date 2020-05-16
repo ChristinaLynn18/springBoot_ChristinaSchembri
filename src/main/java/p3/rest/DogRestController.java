@@ -60,7 +60,7 @@ public class DogRestController {
 	
 	@GetMapping({"/byType/{type}"})
 	public  Optional<List<Dog>> findByType(@PathVariable String type) {
-		Optional<Dog> dog = dogRepository.findById(id);
-		return dog;
+		Optional<List<Dog>> oDogs = dogRepository.findByType(type);
+		return oDogs;
 	}
 }

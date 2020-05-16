@@ -5,6 +5,6 @@ import java.util.Optional;
 
 public interface JpaRepository<T, ID> {
 	public List<T> findAll();
-	public Optional<T> findById();
+	public Optional<T> findById(Long id);
 
 }

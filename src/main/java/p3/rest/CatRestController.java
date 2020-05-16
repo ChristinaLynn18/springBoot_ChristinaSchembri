@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import exp17c.jdbctemplate.dao.EmployeeDAO;
-import exp17c.jdbctemplate.model.Employee;
+import p3.jdbctemplate.dao.CatDAO;
+import p3.jdbctemplate.model.Cat;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -56,7 +56,7 @@ public class CatRestController {
 	
 	@GetMapping({"/byType{type}"})
 	public  Optional<List<Cat>> findByType(@PathVariable String type) {
-		Optional<Cat> cat = catDAO.findByType(type);
-		return cat;
+		Optional<List<Cat>> oCats = catDAO.findByType(type);
+		return oCats;
 	}
 }

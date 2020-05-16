@@ -1,5 +1,6 @@
 package p3.jdbctemplate.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +32,7 @@ public class CatDAOImpl implements CatDAO {
 		return jdbcTemplate.query(sql, rowMapper);
 	}
 	
+	@Override
 	public Optional<Cat> findById(Long id) {
 		Optional<Cat> oCat = Optional.ofNullable(null);
 		String sql = "SELECT e.id, e.name, e.type FROM cat e WHERE e.id = ?";
@@ -46,10 +48,20 @@ public class CatDAOImpl implements CatDAO {
 	
 	@Override
 	public Optional<List<Cat>> findByType(String type) {
-		Optional<Cat> oCat = Optional.ofNullable(null);
+		Optional<List<Cat>> oCat = Optional.ofNullable(null);
+		List<Cat> cats = new ArrayList<Cat>();
 		String sql = "SELECT e.id, e.name, e.type FROM cat e WHERE e.type = ?";
-		RowMapper<Cat> rowMapper = new BeanPropertyRowMapper<Cat>(Cat.class);
-				return jdbcTemplate.query(sql, rowMapper);
+		if(type != null)
+		{
+			RowMapper<Cat> rowMapper = new BeanPropertyRowMapper<Cat>(Cat.class);
+			cats = jdbcTemplate.query(sql,  rowMapper, type);
+			oCat = Optional.ofNullable(cats);
+		}
+		else
+		{
+			logger.warn("findByType unExpected null input, will do nothing, will return nulled Optional");
+		}
+		return oCat;
 		
 	}
 
